@@ -9,8 +9,9 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: "500Mi"
+    storage: "5Gi"
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
+  awsElasticBlockStore:
+      volumeID: "vol-0e0928c2f03c580e8"
+      fsType: ext4

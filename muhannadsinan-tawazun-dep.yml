@@ -33,12 +33,12 @@ spec:
             - name: DB_PASSWORD
               value: DevOps2022
           resources:
-            limits:
-              memory: "2Gi"
-              cpu: "2"
             requests:
               memory: "1Gi"
               cpu: "1"
+            limits:
+              memory: "2Gi"
+              cpu: "2"
           startupProbe:
             tcpSocket:
               port: 8080

@@ -31,12 +31,12 @@ spec:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
           resources:
-            limits:
-              memory: "1Gi"
-              cpu: "1"
             requests:
               memory: "1Gi"
               cpu: "1"
+            limits:
+              memory: "2Gi"
+              cpu: "2"
           livenessProbe:
             exec:
               command:
