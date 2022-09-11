@@ -1,9 +1,9 @@
 apiVersion: v1
-#kind: ResourceQuota
+kind: ResourceQuota
 metadata:
   name: resources
   namespace: muhannadsinan-tawazun
-#spec:
+spec:
   hard:
     requests.cpu: "2"
     requests.memory: 2Gi

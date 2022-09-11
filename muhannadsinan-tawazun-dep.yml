@@ -37,11 +37,11 @@ spec:
               memory: "2Gi"
               cpu: "2"
             requests:
-              memory: "2Gi"
-              cpu: "2"
+              memory: "1Gi"
+              cpu: "1"
           startupProbe:
             tcpSocket:
-              port: 3306
+              port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
             failureThreshold: 60
