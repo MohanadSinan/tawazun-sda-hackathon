@@ -2,9 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tawazun-service
+  namespace: muhannadsinan-tawazun
+  labels:
+    name: muhannadsinan
 spec:
  selector:
-   app: webserver
+   app: tawazun
  type: NodePort
  ports:
     - protocol: TCP
