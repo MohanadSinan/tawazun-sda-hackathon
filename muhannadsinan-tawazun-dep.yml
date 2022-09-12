@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tawazun-deployment
+  namespace: muhannadsinan-tawazun
+  labels:
+    app: tawazun
+    name: muhannadsinan
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tawazun
+  template:
+    metadata:
+      labels:
+        app: tawazun
+    spec:
+      containers:
+        - image: mohanadsinan/tawazun:latest
+          command: ["sleep", "30"]
+          name: tawazun
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_URL
+              value: mysql-service
+            - name: DB_PORT
+              value: '3306'
+            - name: DB_NAME
+              value: tawazun
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              value: DevOps2022
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "2"
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 15
