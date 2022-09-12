@@ -18,6 +18,7 @@ spec:
     spec:
       containers:
         - image: mohanadsinan/tawazun:latest
+          command: ["sleep", "30"]
           name: tawazun
           ports:
             - containerPort: 8080
@@ -34,26 +35,20 @@ spec:
               value: DevOps2022
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "1"
+              memory: "500Mi"
+              cpu: "500m"
             limits:
               memory: "2Gi"
               cpu: "2"
           startupProbe:
             tcpSocket:
               port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            tcpSocket:
+              port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
-            failureThreshold: 60
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            failureThreshold: 15

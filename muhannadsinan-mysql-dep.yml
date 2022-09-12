@@ -19,6 +19,7 @@ spec:
       containers:
         - name: mysql
           image: mysql:latest
+          command: ["sleep", "15"]
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: DevOps2022
@@ -32,27 +33,24 @@ spec:
               mountPath: /var/lib/mysql
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "1"
+              memory: "500Mi"
+              cpu: "500m"
             limits:
               memory: "2Gi"
               cpu: "2"
-          livenessProbe:
-            exec:
-              command:
-                - bash
-                - "-c"
-                - |
-                  mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD ping &> /dev/null
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
           startupProbe:
             tcpSocket:
               port: 3306
-            initialDelaySeconds: 60
-            failureThreshold: 30
+            initialDelaySeconds: 90
             periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 15
+          
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
