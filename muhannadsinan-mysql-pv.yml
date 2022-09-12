@@ -12,6 +12,5 @@ spec:
     storage: "5Gi"
   accessModes:
     - ReadWriteOnce
-  awsElasticBlockStore:
-      volumeID: "vol-0e0928c2f03c580e8"
-      fsType: ext4
+  hostPath:
+    path: "/mnt/data"
